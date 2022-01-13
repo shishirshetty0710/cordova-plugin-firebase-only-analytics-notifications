@@ -1,5 +1,6 @@
 var fs = require("fs");
 var path = require("path");
+var utils = require("../../configurations/utilities");
 
 function rootBuildGradleExists() {
   var target = path.join("platforms", "android", "build.gradle");
@@ -18,8 +19,16 @@ function readRootBuildGradle() {
  * Added a dependency on 'com.google.gms' based on the position of the know 'com.android.tools.build' dependency in the build.gradle
  */
 function addDependencies(buildGradle, context) {
+  var androidTargetSdk = utils.getAndroidTargetSdk();
+  var regex;
+  if (androidTargetSdk <= 29) {
+    regex = /^(\s*)classpath 'com.android.tools.build(.*)/m;
+  } else {
+    regex = /^(\s*)classpath "com.android.tools.build(.*)/m;
+  }
+
   // find the known line to match
-  var match = buildGradle.match(/^(\s*)classpath "com.android.tools.build(.*)/m);
+  var match = buildGradle.match(regex);
   var whitespace = match[1];
   
   // modify the line to add the necessary dependencies
@@ -32,7 +41,7 @@ function addDependencies(buildGradle, context) {
   var modifiedLine = match[0] + '\n' + googlePlayDependency + '\n' + fabricDependency;
 
   // modify the actual line
-  var modifiedGradle = buildGradle.replace(/^(\s*)classpath "com.android.tools.build(.*)/m, modifiedLine);
+  var modifiedGradle = buildGradle.replace(regex, modifiedLine);
 
   return modifiedGradle;
 }
