@@ -21,7 +21,7 @@ function readRootBuildGradle() {
 function addDependencies(buildGradle, context) {
   var androidTargetSdk = utils.getAndroidTargetSdk();
   var regex;
-  if (androidTargetSdk <= 29) {
+  if (androidTargetSdk <= 30) {
     regex = /^(\s*)classpath 'com.android.tools.build(.*)/m;
   } else {
     regex = /^(\s*)classpath "com.android.tools.build(.*)/m;
