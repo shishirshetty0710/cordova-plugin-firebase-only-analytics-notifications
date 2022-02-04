@@ -150,7 +150,8 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       Intent intent = new Intent(this, OnNotificationOpenReceiver.class);
       intent.putExtras(bundle);
       PendingIntent pendingIntent;
-      if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+      //android.os.Build.VERSION_CODES.S
+      if (android.os.Build.VERSION.SDK_INT >= 31) {
         pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
       } else {
         pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
