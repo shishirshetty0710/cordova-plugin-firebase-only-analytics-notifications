@@ -3,11 +3,11 @@ package org.apache.cordova.firebase;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.core.app.TaskStackBuilder;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -149,24 +149,29 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     }
 
     if (showNotification) {
-      //Intent intent = new Intent(this, OnNotificationOpenReceiver.class);
+      /*
+      Intent intent = new Intent(this, OnNotificationOpenReceiver.class);
+      intent.putExtras(bundle);
+      PendingIntent pendingIntent;
+      //android.os.Build.VERSION_CODES.S
+      if (android.os.Build.VERSION.SDK_INT >= 31) {
+        pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+      } else {
+        pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+      }
+      */
       
       Context context = getApplicationContext();
       PackageManager pm = context.getPackageManager();
       Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
-      
+      intent.putExtras(bundle);
       TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
       stackBuilder.addNextIntentWithParentStack(intent);
-     
-      intent.putExtras(bundle);
-      
       PendingIntent pendingIntent;
       //android.os.Build.VERSION_CODES.S
       if (android.os.Build.VERSION.SDK_INT >= 31) {
-        //pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
       } else {
-        //pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
       }
       
