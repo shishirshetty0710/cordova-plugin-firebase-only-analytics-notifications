@@ -13,7 +13,7 @@ public class OnNotificationOpenActivity extends Activity {
     private static final String TAG = "FirebasePlugin";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "OnNotificationOpenActivity onCreate called");
         super.onCreate(savedInstanceState);
         processNotification();
@@ -21,7 +21,7 @@ public class OnNotificationOpenActivity extends Activity {
     }
 
     @Override
-    public void onNewIntent(Intent intent) {
+    protected void onNewIntent(Intent intent) {
         Log.d(TAG, "OnNotificationOpenActivity onNewIntent called");
         super.onNewIntent(intent);
         processNotification();
