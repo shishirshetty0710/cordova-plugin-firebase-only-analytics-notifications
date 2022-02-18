@@ -17,7 +17,7 @@ public class OnNotificationOpenActivity extends Activity {
         Log.d(TAG, "OnNotificationOpenActivity onCreate called");
         super.onCreate(savedInstanceState);
         processNotification();
-        this.finish();        
+        this.finish();
     }
 
     @Override
