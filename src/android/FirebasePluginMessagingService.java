@@ -149,6 +149,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     }
 
     if (showNotification) {
+      
       /*
       Intent intent = new Intent(this, OnNotificationOpenReceiver.class);
       intent.putExtras(bundle);
@@ -161,6 +162,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       }
       */
       
+      /*
       Context context = getApplicationContext();
       PackageManager pm = context.getPackageManager();
       Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
@@ -173,6 +175,18 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
       } else {
         pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+      }
+      */
+
+      
+      Intent intent = new Intent(this, OnNotificationOpenActivity.class);
+      intent.putExtras(bundle);
+      PendingIntent pendingIntent;
+      //android.os.Build.VERSION_CODES.S
+      if (android.os.Build.VERSION.SDK_INT >= 31) {
+        pendingIntent = PendingIntent.getActivity(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+      } else {
+        pendingIntent = PendingIntent.getActivity(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
       }
       
       String channelId = this.getStringResource("default_notification_channel_id");
