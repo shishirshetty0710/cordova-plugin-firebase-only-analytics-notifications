@@ -15,7 +15,7 @@ public class OnNotificationOpenActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "OnNotificationOpenActivity onCreate called");
-        super.OnCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         processNotification();
         this.finish();        
     }
