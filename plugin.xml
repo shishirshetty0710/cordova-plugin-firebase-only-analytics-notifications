@@ -55,7 +55,8 @@
           <action android:name="com.google.firebase.MESSAGING_EVENT"/>
         </intent-filter>
       </service>
-      <receiver android:name="org.apache.cordova.firebase.OnNotificationOpenReceiver"></receiver>
+      <receiver android:name="org.apache.cordova.firebase.OnNotificationOpenReceiver" />
+      <activity android:name="org.apache.cordova.firebase.OnNotificationOpenActivity" />
     </config-file>
     <config-file target="AndroidManifest.xml" parent="/manifest/application">
       <meta-data android:name="com.google.firebase.messaging.default_notification_channel_id" android:value="@string/default_notification_channel_id"/>
