@@ -180,8 +180,8 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       
       Intent intent = new Intent(this, OnNotificationOpenActivity.class);
       intent.putExtras(bundle);
-      intent.addFlags(INTENT.FLAG_ACTIVITY_CLEAR_TOP);
-      
+      intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
       PendingIntent pendingIntent;
       //android.os.Build.VERSION_CODES.S
       if (android.os.Build.VERSION.SDK_INT >= 31) {
