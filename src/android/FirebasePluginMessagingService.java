@@ -177,7 +177,6 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
         pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
       }
       */
-
       
       Intent intent = new Intent(this, OnNotificationOpenActivity.class);
       intent.putExtras(bundle);

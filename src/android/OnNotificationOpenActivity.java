@@ -14,11 +14,22 @@ public class OnNotificationOpenActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        //super.OnCreate(savedInstanceState);
-        
         Log.d(TAG, "OnNotificationOpenActivity onCreate called");
+        super.OnCreate(savedInstanceState);
+        processNotification();
+        this.finish();        
+    }
 
-		Context context = getApplicationContext();
+    @Override
+    public void onNewIntent(Intent intent) {
+        Log.d(TAG, "OnNotificationOpenActivity onNewIntent called");
+        super.onNewIntent(intent);
+        processNotification();
+        this.finish();
+    }
+
+    private void processNotification() {
+        Context context = getApplicationContext();
         PackageManager pm = context.getPackageManager();
         Intent launchIntent = pm.getLaunchIntentForPackage(context.getPackageName());
         launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -30,6 +41,5 @@ public class OnNotificationOpenActivity extends Activity {
     
         launchIntent.putExtras(data);
         context.startActivity(launchIntent);
-        //this.finish();
     }
 }
