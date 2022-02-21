@@ -164,7 +164,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       } else {
         Intent intent = new Intent(this, OnNotificationOpenReceiver.class);
         intent.putExtras(bundle);
-        pendingIntent = PendingIntent.getActivity(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        pendingIntent = PendingIntent.getBroadcast(this, id.hashCode(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
       }
 
       String channelId = this.getStringResource("default_notification_channel_id");
