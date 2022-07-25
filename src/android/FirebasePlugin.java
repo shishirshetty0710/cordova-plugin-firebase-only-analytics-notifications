@@ -103,7 +103,7 @@ public class FirebasePlugin extends CordovaPlugin {
       this.getId(callbackContext);
       return true;      
     } else if (action.equals("getToken")) {
-      this.getToken(callbackContext);
+      this.getToken(callbackContext, args.getString(0));
       return true;
     } else if (action.equals("hasPermission")) {
       this.hasPermission(callbackContext);
@@ -339,7 +339,7 @@ public class FirebasePlugin extends CordovaPlugin {
     });
   }
 
-  private void getToken(String type, final CallbackContext callbackContext) {
+  private void getToken(final CallbackContext callbackContext, String type) {
     Log.d(TAG, "getToken called");
     if (type.isEmpty()) {
        cordova.getThreadPool().execute(new Runnable() {
