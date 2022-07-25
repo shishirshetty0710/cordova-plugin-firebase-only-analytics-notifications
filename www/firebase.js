@@ -9,8 +9,8 @@ exports.getId = function (success, error) {
   exec(success, error, PLUGIN_NAME, "getId", []);
 };
 
-exports.getToken = function (success, error) {
-  exec(success, error, PLUGIN_NAME, "getToken", []);
+exports.getToken = function (type, success, error) {
+  exec(success, error, PLUGIN_NAME, "getToken", [type || ""]);
 };
 
 exports.hasPermission = function (success, error) {
