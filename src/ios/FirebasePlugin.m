@@ -61,7 +61,7 @@ static FirebasePlugin * firebasePlugin;
     NSString * type = [command.arguments objectAtIndex: 0];
 
     if ([type length] == 0) {
-        pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString: [[FIRInstanceID instanceID]token]];
+        pluginResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsString: [[FIRInstanceID instanceID] token]];
         [self.commandDelegate sendPluginResult: pluginResult callbackId: command.callbackId];
     } else if ([type hasPrefix:  @ "apns-"]) {
         NSData * apnsToken = [FIRMessaging messaging].APNSToken;
